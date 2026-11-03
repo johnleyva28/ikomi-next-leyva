@@ -16,3 +16,15 @@
 * **Justificación:** Se usó la API nativa `Metadata` y `generateMetadata` de Next.js en lugar de paquetes viejos tipo `react-helmet`, lo que garantiza el correcto SEO del App Router.
 
 ---
+## Casos de Código Desactualizado / Errores Detectados de la IA (Parte 5.2)
+
+### Caso 1: Error de Prerenderizado en Ruta Dinámica `/productos/[slug]`
+* **Problema detectado:** Al ejecutar `npm run build`, Next.js 16 arrojó un error indicando que los `params` asíncronos en la ruta dinámica rompían el prerenderizado estático de la página.
+* **Código incorrecto (Antes):** Falta de la función `generateStaticParams()` para definir los parámetros válidos al momento de compilar.
+* **Código corregido (Después):**
+```typescript
+export async function generateStaticParams() {
+  return productosData.map((producto) => ({
+    slug: producto.slug,
+  }));
+}
