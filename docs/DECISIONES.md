@@ -34,3 +34,11 @@ En una SPA tradicional con Vite, el servidor entrega un archivo HTML prácticame
 2. **Lenta carga inicial:** En conexiones móviles lentas, el cliente ve una pantalla blanca mientras carga el bundle.
 
 Con Next.js y App Router, el HTML de páginas clave (como la sección de Inicio o Catálogo de Productos) se renderiza en el servidor y llega listo al navegador. **Ejemplo concreto en el sitio:** Al entrar a la ruta `/productos`, Google indexa de inmediato los títulos y descripciones de las piezas mecánicas en el HTML original, logrando que IKOMI PERÚ aparezca en las búsquedas cuando un cliente busque "repuestos de camiones en Perú".
+---
+
+## 4. Estructura de Enrutamiento (Layouts Anidados y Route Groups)
+
+| Enfoque Evaluado | Decisión Tomada | Justificación Técnica |
+| :--- | :--- | :--- |
+| **Layout Anidado para `/productos`** | **Descartado** | El sitio corporativo de IKOMI PERÚ posee una estructura visual limpia y uniforme en todas sus vistas. Usar un layout anidado agregaría capas innecesarias de componentes, ya que la subruta `/productos/[slug]` solo requiere renderizar el detalle del repuesto sin mantener una barra lateral o submenú persistente. |
+| **Route Groups `(marketing)`** | **Descartado** | Las rutas `/nosotros`, `/servicios`, `/marcas` y `/contacto` comparten exactamente la misma envolvente (Navbar y Footer global del layout raíz). Usar grupos de rutas como `(marketing)` agregaría complejidad visual a la carpeta `app/` sin aportar ventajas en la separación de layouts o middleware. |
