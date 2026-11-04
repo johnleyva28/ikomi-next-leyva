@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Producto } from "@/data/productos";
+import { ArrowRight } from "lucide-react";
 
 interface ProductCardProps {
   producto: Producto;
@@ -66,18 +67,7 @@ export default function ProductCard({ producto }: ProductCardProps) {
               className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap text-xs font-bold uppercase tracking-wider text-white transition-colors hover:text-red-bright"
             >
               Ver detalle
-              <svg
-                className="h-3.5 w-3.5"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
+              <ArrowRight className="h-3.5 w-3.5" aria-hidden />
             </Link>
           </div>
         </div>

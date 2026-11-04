@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { contacto, estadisticas } from "@/data/sitio";
+import { ArrowRight, MapPin } from "lucide-react";
 
 /**
  * Banner principal de la portada. Server Component: la imagen y los textos
@@ -41,18 +42,7 @@ export default function Hero() {
             className="inline-flex items-center gap-2 rounded-md bg-red-bright px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-red"
           >
             Ver catálogo
-            <svg
-              className="h-4 w-4"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
+            <ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
           <a
             href={contacto.whatsapp}
@@ -65,7 +55,7 @@ export default function Hero() {
         </div>
 
         <p className="animate-rise mt-10 flex items-center gap-2 text-sm text-navy-mist [animation-delay:420ms]">
-          <span aria-hidden="true">📍</span>
+          <MapPin className="h-4 w-4 text-red-bright" aria-hidden />
           {contacto.direccion}
         </p>
       </div>

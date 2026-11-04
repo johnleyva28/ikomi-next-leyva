@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import Hero from "@/components/Hero";
 import SectionTitle from "@/components/SectionTitle";
 import ProductCard from "@/components/ProductCard";
@@ -42,18 +43,7 @@ export default function HomePage() {
             className="inline-flex items-center gap-2 rounded-md border border-white/25 px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:border-red-bright hover:text-red-bright"
           >
             Ver todo el catálogo
-            <svg
-              className="h-4 w-4"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
+            <ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
         </div>
       </section>

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 
 const navItems = [
   { name: "INICIO", path: "/" },
@@ -50,10 +51,19 @@ export default function Navbar() {
         {/* BARRA SUPERIOR DE CONTACTO */}
         <div className="hidden w-full items-center justify-between border-b border-white/10 bg-navy-deep px-6 py-1.5 text-[11px] text-gray-300 lg:flex xl:px-12">
           <div className="flex items-center gap-6">
-            <span>📍 Av. Nicolás Ayllón 3384, Ate</span>
-            <span>📧 ventas@ikomiperu.com</span>
+            <span className="flex items-center gap-1.5">
+              <MapPin className="h-3.5 w-3.5 text-red-bright" aria-hidden />
+              Av. Nicolás Ayllón 3384, Ate
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Mail className="h-3.5 w-3.5 text-red-bright" aria-hidden />
+              ventas@ikomiperu.com
+            </span>
           </div>
-          <span className="font-bold tracking-wide text-red-bright">📞 +51 985 068 416</span>
+          <span className="flex items-center gap-1.5 font-bold tracking-wide text-red-bright">
+            <Phone className="h-3.5 w-3.5" aria-hidden />
+            +51 985 068 416
+          </span>
         </div>
 
         {/* LOGO + NAVEGACIÓN */}
@@ -157,18 +167,7 @@ export default function Navbar() {
                     style={{ animationDelay: `${120 + index * 60}ms` }}
                   >
                     {item.name}
-                    <svg
-                      className="h-5 w-5 shrink-0 opacity-70"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M7 17 17 7M9 7h8v8" />
-                    </svg>
+                    <ArrowUpRight className="h-5 w-5 shrink-0 opacity-70" aria-hidden />
                   </Link>
                 );
               })}
@@ -177,10 +176,12 @@ export default function Navbar() {
             {/* PIE DEL PANEL: CONTACTO */}
             <div className="mt-8 flex flex-col gap-3 text-sm text-gray-300">
               <a href="tel:+51985068416" className="flex items-center gap-2">
-                <span aria-hidden="true">📞</span> +51 985 068 416
+                <Phone className="h-4 w-4 text-red-bright" aria-hidden />
+                +51 985 068 416
               </a>
               <a href="mailto:ventas@ikomiperu.com" className="flex items-center gap-2">
-                <span aria-hidden="true">📧</span> ventas@ikomiperu.com
+                <Mail className="h-4 w-4 text-red-bright" aria-hidden />
+                ventas@ikomiperu.com
               </a>
               <a
                 href={WHATSAPP_URL}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Sistema } from "@/data/sitio";
+import { ArrowRight } from "lucide-react";
 
 interface CategoryCardProps {
   sistema: Sistema;
@@ -29,18 +30,7 @@ export default function CategoryCard({ sistema }: CategoryCardProps) {
         <p className="mt-1 text-sm text-navy-mist">{sistema.descripcion}</p>
         <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-red-bright">
           Ver repuestos
-          <svg
-            className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14M13 6l6 6-6 6" />
-          </svg>
+          <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
         </span>
       </div>
     </Link>
