@@ -63,7 +63,7 @@ Con Next.js y App Router, el HTML de páginas clave (como la sección de Inicio 
 | :--- | :--- |
 | **Marcar toda la app con `"use client"`** | Mandaría más JavaScript al cliente, el contenido dejaría de estar en el HTML inicial y el SEO de `/productos` se caería. La interacción que necesito está solo en la barra. |
 | **Leer la ruta en el servidor con `headers()`** | Marca la ruta como dinámica (se renderiza en cada petición), pide un `Suspense` y tampoco resuelve bien cuál enlace es el activo. |
-| **Marcar el activo con CSS puro** (`a[href="/productos"] { ... }`) | No funciona: en `/productos/disco-embrague` el CSS no puede saber cuál de los dos enlaces es el que está activo. Con `usePathname` se resuelve con `pathname === path || pathname.startsWith(path)`. |
+| **Marcar el activo con CSS puro** (`a[href="/productos"] { ... }`) | No funciona: en `/productos/disco-embrague` el CSS no puede saber cuál de los dos enlaces es el que está activo. Con `usePathname` se resuelve con `pathname === path \|\| pathname.startsWith(path)`. |
 | **`useRouter()` de `next/router`** | Es del Pages Router y no existe en el App Router; en Next 16 el hook correcto es `usePathname` de `next/navigation`. Es de los errores típicos que te propone una IA. |
 | **Pensar que el `Link` necesita `"use client"`** | `Link` sí se puede usar en un Server Component. Lo que obliga a que el Navbar sea cliente es el `usePathname` y el `useState` del menú, no el `Link`. |
 
@@ -74,3 +74,58 @@ Con Next.js y App Router, el HTML de páginas clave (como la sección de Inicio 
 | **Menú móvil a pantalla completa (`fixed` + `clip-path`)** | Desplegable colgando de la barra | Es lo que hace el sitio real (lo revisé con el navegador): la pantalla se cubre con el panel y el logo y el botón quedan arriba. Por eso los enlaces van en mayúsculas grandes, con separador y flecha, y al pie el teléfono, el correo y el WhatsApp. |
 | **Cambio de diseño en `lg` (1024 px)** | Menú de escritorio desde `md` (768 px) | Con seis secciones la barra completa no cabe bien en 768 px. Con `lg` el celular y la tableta se ven limpios y el escritorio aparece desde 1024 px, como en el original, que cambia a los 1160 px. |
 | **Bloquear el scroll del fondo y cerrar con `Escape`** | Dejar el menú como una lista simple | Con el panel a pantalla completa el fondo se seguiría moviendo con el dedo y el usuario se pierde. Bloquear el `overflow` del `body` y cerrar con `Escape` es lo que espera cualquiera que use teclado o lector de pantalla. |
+
+
+---
+
+## 6. Estrategia de estilos
+
+| Opción elegida | Alternativa descartada | Justificación |
+| :--- | :--- | :--- |
+| **Tailwind CSS v4** | CSS Modules / Bootstrap | Con Tailwind el estilo vive junto al marcado, así que un componente se lee completo en un solo archivo y no hay que saltar entre el `.tsx` y su hoja de estilos. Para este sitio es clave: la barra de navegación, las tarjetas y el panel móvil tienen muchas variantes (activo, hover, responsive) y con clases utilitarias se resuelven sin inventar una jerarquía de selectores. Además v4 permite declarar la paleta y las tipografías en el `@theme` de `globals.css`, que es justo lo que pedía el enunciado: los colores de IKOMI (`#00022a`, `#010646`, `#e3203f`) están escritos una sola vez y se usan como `bg-navy`, `text-red-bright`, etc. |
+| **CSS Modules** | — | Descartado como estrategia general: es válido y no ata el proyecto a una librería, pero obliga a crear un archivo `.module.css` por componente (14 archivos más) y a inventar nombres de clases para algo que Tailwind ya resuelve con las mismas utilidades. |
+| **Bootstrap** | — | Descartado: trae un framework entero con sus propios colores, tipografías y componentes (`.btn`, `.card`, `.navbar`) que choque con la identidad visual de IKOMI y que tendría que sobreescribir casi todo. Además son ~200 KB de CSS para usar cuatro cosas. |
+
+**Cómo se mantiene coherente:** los colores, las tipografías y las animaciones viven en el bloque
+`@theme` de `src/app/globals.css`. Ningún componente escribe un color hexadecimal suelto: todos
+usan los tokens (`bg-navy-deep`, `text-red-bright`, `font-display`).
+
+---
+
+## 7. `next/image` y `next/font`
+
+| API | Qué aporta en este sitio |
+| :--- | :--- |
+| **`next/image`** | Las fotos de los repuestos, los logos de las marcas y el banner del hero pesan bastante y vienen de un dominio externo. `next/image` las reoptimiza (WebP/AVIF, varios anchos), sirve un `srcset` para que el celular baje la versión chica, y añade `width`/`height` para que el navegador reserve el espacio y no haya salto de layout al cargar. También cumple con la criterio 4.3: cada imagen lleva su `alt` descriptivo (por ejemplo, el nombre del repuesto más los vehículos donde aplica) y un `sizes` acorde al grid donde se muestra. |
+| **`next/font`** | `next/font` descarga la fuente **en el build** y la sirve desde el propio dominio. Con eso se cumplen tres cosas: nadie hace peticiones a Google desde el navegador (privacidad), la fuente llega optimizada con `font-display: swap` (no se ve texto invisible esperando) y se cachea para siempre (una sola visita y el resto es gratis). Se usa la misma tipografía condensada del sitio original para los títulos (Oswald) y una sans legible para el texto (Montserrat), declaradas como variables CSS (`--font-oswald`, `--font-montserrat`) y expuestas como `font-display` y `font-body` en el `@theme`. |
+
+---
+
+## 8. Animaciones con propósito
+
+| Animación | Dónde | Por qué mejora la experiencia |
+| :--- | :--- | :--- |
+| **Marquesina de marcas con el patrón Marquee de Magic UI, reescrito en CSS puro** (en lugar de instalar `motion`/framer-motion y usar el componente tal cual) | Inicio y `/marcas` | Es el único elemento del sitio que necesita movimiento infinito. El componente de Magic UI resuelve eso, pero trae `motion` como dependencia y con ella unos 30 KB de JavaScript para una animación que CSS ya hace bien. Lo reescribí con el mismo patrón: el bloque de contenido se repite, `@keyframes marquee` lo desplaza y `group-hover` lo pausa. Son 40 líneas de CSS en `globals.css` y ni una dependencia nueva. La referencia a Magic UI queda anotada en el propio `Marquee.tsx`. |
+| **Hover de las tarjetas de producto** | Catálogo y detalle | La tarjeta se levanta y aparece un borde rojo al pasar el mouse: es la señal que el usuario espera para saber que la tarjeta es clicable, en lugar de tener que subrayarlo todo con iconos. |
+| **Entrada escalonada del hero** | Inicio | El titular, el texto y los botones aparecen en cascada al cargar. Da la sensación de que la página se arma sola y dirige la mirada al botón de cotización, que es lo que queremos que el visitante pulse primero. |
+| **Barrido de luz en la banda de CTA** | Todas las páginas | Un brillo recorre el borde de la banda de llamada a la acción cada pocos segundos, atrayendo la mirada al final del recorrido sin molestar. |
+
+
+---
+
+## 9. Recursos del sitio oficial (contenido e imágenes)
+
+| Opción elegida | Alternativa descartada | Justificación |
+| :--- | :--- | :--- |
+| **Fotos, logos y textos reales de `ikomiperu.com`, servidos con `next/image` desde el dominio remoto** | Descargar las imágenes al repositorio y guardarlas en `public/` | El enunciado pide replicar ese sitio, así que lo fiel es usar su material: las fotos reales de cada repuesto (con el fondo blanco recortado que usa el original), los logos de las marcas y el banner del hero. Como `next/image` se encarga de reoptimizar igual, no pierdo nada de rendimiento. Lo único que exige es permitir el dominio en `next.config.ts` (`images.remotePatterns`), que ya está configurado. La contra es que el sitio depende de que el CDN de IKOMI siga en pie, pero para una réplica de laboratorio es un riesgo que acepto a cambio de parecerse de verdad. |
+| **Mapa de Google Maps embebido con `iframe` + enlace "Cómo llegar"** | Imagen estática del mapa (API de Maps con clave) o solo la dirección en texto | La página de contacto pide que la gente vaya, y un mapa interactivo les dice cómo llegar sin que copien la dirección a otro sitio. La API de mapas estáticos que usa el original necesita una clave de Google y devuelve una imagen que no se puede mover; con el `iframe` de `output=embed` se naviga el mapa y no hay que pagar ni configurar claves. El `loading="lazy"` evita que el mapa pida red antes de que el usuario baje a esa parte de la página. |
+| **Catálogo real de 12 productos** (con SKU, precio, precio anterior, vehículos y marca de repuesto) | Inventar tres productos de ejemplo | Con datos inventados el catálogo no sirve ni para probar la ruta dinámica ni para mostrar el tratamiento de "consultar precio" que usa el original. Con los datos reales se ven los dos casos: repuestos con precio publicado y repuestos que se cotizan por WhatsApp. |
+| **Copiar los textos del sitio original** (misión, visión, valores, proceso de compra y datos de contacto) | Redactar textos nuevos | Los textos del original explican el negocio (17 años, cobertura nacional, asesoría por número de parte) y son lo que el visitante quiere leer. Escribirlos otra vez solo agregaría trabajo sin aportar. |
+
+---
+
+## 10. Esqueleto de carga en la ruta dinámica
+
+| Opción elegida | Alternativa descartada | Justificación |
+| :--- | :--- | :--- |
+| **Envolver la lectura de `params` en `<Suspense>` con un esqueleto de carga** | Leer `params` directo en la página, o marcar la ruta con `export const instant = false` | Con Cache Components y Partial Prefetching activados, Next.js 16 rechaza la navegación al detalle si `params` se lee fuera de un límite de `<Suspense>`: avisa que la transición deja de ser instantánea. La guía `migrating-to-cache-components` del propio paquete pide bajar la lectura al hijo más pequeño posible, y eso es lo que hice: el `Navbar`, el `Footer` y el resto de la página se siguen prerenderizando y solo el detalle del producto entra en streaming. El esqueleto son bloques grises con `animate-pulse` que ocupan el lugar del producto mientras entra, para que la página no salte de alto. La otra salida (`export const instant = false`) era más corta, pero renuncia a la navegación instantánea y deja la ruta bloqueando la respuesta del servidor. |
