@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   description: "Ponte en contacto con nuestro equipo de atención y ventas en Ate, Lima.",
 };
 
+// La página trae el mapa de Google Maps, que es un iframe externo: Next.js no puede validar
+// la navegación instantánea hacia una ruta con recursos de terceros, así que se marca
+// como blocking a propósito (en el resto del sitio la navegación sí es instantánea).
+export const instant = false;
+
 export default function ContactoPage() {
   return (
     <>
