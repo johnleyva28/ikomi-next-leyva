@@ -34,6 +34,8 @@
 * **Justificación:** Acepté la estructura de componentes que propuso la IA porque es justo lo que pide el enunciado y deja el árbol de componentes claro para la sustentación. Pero tres decisiones las tomé yo. Primera: el carrusel de marcas. Tomé el patrón Marquee de Magic UI como base y lo reescribí en CSS puro (el bloque de contenido se repite, `@keyframes marquee` lo desplaza y `group-hover` lo pausa) en vez de instalar el componente tal cual, porque ese componente arrastra la librería `motion` (framer-motion) y con ella unos 30 KB de JavaScript para una animación que CSS ya hace bien. Segunda: el esqueleto de carga. La primera versión de la página de detalle leía `params` directo y Next.js 16 lo rechazaba con "Next.js encountered URL data during prerendering", así que le bajé la lectura a un hijo dentro de `<Suspense>` con un skeleton, que es lo que recomienda la guía de Cache Components del propio paquete. Tercera: los recursos del sitio oficial. Usé las fotos, los logos y los textos reales de ikomiperu.com en vez de inventar imágenes, porque el enunciado pide replicar ese sitio y con `next/image` las fotos se optimizan igual; el único costo es que el dominio tiene que estar permitido en `next.config.ts`, y eso ya está.
 
 ---
+
+---
 ## Casos de Código Desactualizado / Errores Detectados de la IA (Parte 5.2)
 
 ### Caso 1: Error de Prerenderizado en Ruta Dinámica `/productos/[slug]`
@@ -120,3 +122,25 @@ export default function ProductoDetallePage({ params }: Props) {
 }
 ```
 * **Cómo se corrigió:** leyendo la guía `migrating-to-cache-components` que viene en `node_modules/next/dist/docs`, que dice que hay que bajar la lectura al hoja más pequeño posible para que el resto siga prerenderizándose.
+
+---
+
+## Reflexión (Parte 5.3)
+
+Con la IA aprendí a manejar Next.js de verdad: el enrutamiento por archivos, la diferencia entre Server y Client Components, el `usePathname` y el `metadata`. Antes solo había visto tutoriales de Vite y no entendía por qué el layout raíz no se vuelve a renderizar al cambiar de ruta ni por qué un componente con estado tiene que ser cliente. También me ordenó el orden de las cosas: primero el enrutamiento, después los datos y al final el diseño.
+
+Lo que tuve que resolver solo fue todo lo que la IA daba por sentado. Propuso el menú como un desplegable y ni miró cómo lo hace el sitio original; lo resolví entrando a ikomiperu.com con el navegador y copiando su panel a pantalla completa. También falló con la tipografía: puso Big Shoulders Display, que no existe en el manifiesto de Next 16, y el build se caía.
+
+Lo que más me costó fue distinguir un error real de un capricho de la IA: "Unknown font" y el aviso de `instant` parecían bugs míos, y tuve que aislar cambio por cambio hasta dar con ellos.
+
+---
+
+## Preparación para la sustentación (Parte 5.4)
+
+Cambios que el docente puede pedir en vivo y dónde tocar:
+
+| Cambio pedido | Dónde se hace | Qué hay que explicar |
+| :--- | :--- | :--- |
+| **Agregar la ruta `/blog`** | `src/app/blog/page.tsx` con su `metadata` y un enlace en el `navItems` de `src/components/Navbar.tsx` | Que las rutas salen de los archivos, que el `metadata` se exporta en cada `page.tsx` y que con el `Link` la navegación no recarga la página. |
+| **Añadir una prop a `ProductCard`** | `src/components/ProductCard.tsx` (la prop ya existe: recibe `producto`) | Que los datos entran por props y no se importan dentro del componente, por eso el mismo sirve para el listado y para los destacados del inicio. |
+| **Cambiar el color principal del tema** | `src/app/globals.css`, en el bloque `@theme` (`--color-red-bright`, `--color-red`) | Que los colores están escritos una sola vez en el tema y que ningún componente usa un hexadecimal suelto, así que cambiar el token cambia todo el sitio. |
