@@ -1,0 +1,44 @@
+### caso-anchor
+| Fase | Tipo | Código | Content-Type | Cabeceras Next.js | URL |
+| --- | --- | --- | --- | --- | --- |
+| CARGA | document | 200 | text/html | - | / |
+| CARGA | image | 200 | image/webp | - | /_next/image?url=https%3A%2F%2Fikomiperu.com%2Fassets%2Fimg%2Flogo-ikomi.webp&w=48&q=75 |
+| CARGA | stylesheet | 200 | text/css | - | /_next/static/chunks/src_app_globals_162hn9oqc8uss.css |
+| CARGA | script | 200 | application/javascript | - | /_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1ke67x9v2_83g._.js |
+| CARGA | script | 200 | application/javascript | - | /_next/static/chunks/0ywt_next_dist_compiled_react-dom_cjs_react-dom_development_0otxlp2rxbbpd.js |
+| CARGA | script | 200 | application/javascript | - | /_next/static/chunks/0ywt_next_dist_compiled_react-dom_0rwo8z3tcl_ej._.js |
+| CARGA | script | 200 | application/javascript | - | /_next/static/chunks/0ywt_next_dist_compiled_0u1rk04dk7bwn._.js |
+| CARGA | script | 200 | application/javascript | - | /_next/static/chunks/0ywt_next_dist_compiled_react-server-dom-turbopack_046ka0b8rhora._.js |
+| CARGA | script | 200 | application/javascript | - | /_next/static/chunks/_1anvha4rlo79g._.js |
+| CARGA | script | 200 | application/javascript | - | /_next/static/chunks/0zix_%40swc_helpers_cjs_0hi-e474n4mns._.js |
+| CARGA | script | 200 | application/javascript | - | /_next/static/chunks/0ywt_next_dist_1nuh0j1dzzyrb._.js |
+| CARGA | script | 200 | application/javascript | - | /_next/static/chunks/_219uq1sj0q91c._.js |
+| CARGA | script | 200 | application/javascript | - | /_next/static/chunks/turbopack-_0msyu_q7jg8da._.js |
+| CARGA | script | 200 | application/javascript | - | /_next/static/chunks/src_components_Navbar_tsx_1vbh6thtbzhm1._.js |
+| CARGA | script | 200 | application/javascript | - | /_next/static/chunks/0ywt_next_04cq-x1infiiz._.js |
+| CARGA | script | 200 | application/javascript | - | /_next/static/chunks/0ywt_next_dist_compiled_next-devtools_index_1dogdijxcam62.js |
+| CARGA | script | 200 | application/javascript | - | /_next/static/chunks/0ywt_next_dist_compiled_react-dom_cjs_react-dom-client_development_1qxumpktit7il.js |
+| CARGA | script | 200 | application/javascript | - | /_next/static/chunks/0ywt_next_dist_client_0m41xrspni8-_._.js |
+| CARGA | script | 200 | application/javascript | - | /_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsayzyj2p6._.js |
+| CLIC | document | 200 | text/html | - | /productos |
+| CLIC | stylesheet | 304 | - | - | /_next/static/chunks/src_app_globals_162hn9oqc8uss.css |
+| CLIC | image | 304 | - | - | /_next/image?url=https%3A%2F%2Fikomiperu.com%2Fassets%2Fimg%2Flogo-ikomi.webp&w=48&q=75 |
+| CLIC | script | 304 | - | - | /_next/static/chunks/0ywt_next_dist_compiled_next-devtools_index_1dogdijxcam62.js |
+| CLIC | script | 304 | - | - | /_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1ke67x9v2_83g._.js |
+| CLIC | script | 304 | - | - | /_next/static/chunks/0ywt_next_dist_compiled_react-dom_cjs_react-dom-client_development_1qxumpktit7il.js |
+| CLIC | script | 304 | - | - | /_next/static/chunks/0ywt_next_dist_compiled_react-dom_cjs_react-dom_development_0otxlp2rxbbpd.js |
+| CLIC | script | 304 | - | - | /_next/static/chunks/0ywt_next_dist_compiled_react-dom_0rwo8z3tcl_ej._.js |
+| CLIC | script | 304 | - | - | /_next/static/chunks/0ywt_next_dist_compiled_react-server-dom-turbopack_046ka0b8rhora._.js |
+| CLIC | script | 304 | - | - | /_next/static/chunks/0ywt_next_dist_compiled_0u1rk04dk7bwn._.js |
+| CLIC | script | 304 | - | - | /_next/static/chunks/0ywt_next_dist_client_0m41xrspni8-_._.js |
+| CLIC | script | 304 | - | - | /_next/static/chunks/0ywt_next_dist_1nuh0j1dzzyrb._.js |
+| CLIC | script | 304 | - | - | /_next/static/chunks/0zix_%40swc_helpers_cjs_0hi-e474n4mns._.js |
+| CLIC | script | 304 | - | - | /_next/static/chunks/_1anvha4rlo79g._.js |
+| CLIC | script | 304 | - | - | /_next/static/chunks/turbopack-_0msyu_q7jg8da._.js |
+| CLIC | script | 304 | - | - | /_next/static/chunks/0ywt_next_04cq-x1infiiz._.js |
+| CLIC | script | 304 | - | - | /_next/static/chunks/src_components_Navbar_tsx_1vbh6thtbzhm1._.js |
+| CLIC | script | 200 | application/javascript | - | /_next/static/chunks/_0tvoxopx9tmg4._.js |
+| CLIC | script | 304 | - | - | /_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsayzyj2p6._.js |
+
+Total peticiones: 38 | tras el clic: 19
+URL final: http://localhost:3000/productos

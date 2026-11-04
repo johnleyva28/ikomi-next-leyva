@@ -1,0 +1,40 @@
+npm notice run ikomi-next-leyva@0.1.0 build
+npm notice run next build
+▲ Next.js 16.4.4 (Turbopack)
+⚠ Warning: Next.js ignored pnpm-lock.yaml in C:\Users\LENOVO because it is outside the current Git repository (C:\Users\LENOVO\Desktop\TECSUP_ACADEMIC\5to CICLO - 2026-II\1-DESARROLLO DE APLICACIONES WEB AVANZADO\MODULO 3\pcalificada3\ikomi-next-leyva).
+ To use this directory, set `turbopack.root` in your Next.js config.
+
+✓ Running next.config.ts took 47ms
+- Cache Components enabled
+- Partial Prefetching enabled
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 2.4s
+  Running TypeScript ...
+  Finished TypeScript in 1668ms ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/22) ...
+  Generating static pages using 11 workers (5/22) 
+  Generating static pages using 11 workers (10/22) 
+  Generating static pages using 11 workers (16/22) 
+✓ Generating static pages using 11 workers (22/22) in 1783ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /contacto
+├ ○ /marcas
+├ ○ /nosotros
+├ ○ /productos
+├   /productos/[slug]
+│ ├ ◐ /productos/[slug]
+│ ├ ○ /productos/balancin-de-admision-hyundai-d4bh-d4bb
+│ ├ ○ /productos/balancin-de-escape-hyundai-d4bh-d4bb
+│ └ ◐ [+10 more paths]
+└ ○ /servicios
+
+
+○  (Static)             prerendered as static content
+◐  (Partial Prerender)  prerendered as static HTML with dynamic server-streamed content
+
