@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { contacto, estadisticas } from "@/data/sitio";
 import { ArrowRight, MapPin } from "lucide-react";
+import IconoWhatsApp from "@/components/IconoWhatsApp";
 
 /**
  * Banner principal de la portada. Server Component: la imagen y los textos
@@ -50,6 +51,7 @@ export default function Hero() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-md border border-white/25 px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:border-white hover:bg-white/10"
           >
+            <IconoWhatsApp className="h-4 w-4" />
             Cotizar por WhatsApp
           </a>
         </div>

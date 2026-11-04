@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import IconoWhatsApp from "@/components/IconoWhatsApp";
 
 const navItems = [
   { name: "INICIO", path: "/" },
@@ -189,6 +190,7 @@ export default function Navbar() {
                 rel="noopener noreferrer"
                 className="mt-3 inline-flex items-center justify-center gap-2 rounded-md bg-red-bright px-5 py-3 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-red"
               >
+                <IconoWhatsApp className="h-4 w-4" />
                 Cotizar por WhatsApp
               </a>
             </div>

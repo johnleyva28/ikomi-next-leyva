@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import IconoWhatsApp from "@/components/IconoWhatsApp";
 
 const perfiles = ["Mecánico", "Dueño de flota", "Transportista", "Vendedor de repuestos", "Otro"];
 
@@ -144,6 +145,7 @@ export default function ContactForm({ whatsapp }: ContactFormProps) {
         rel="noopener noreferrer"
         className="mt-2 inline-flex items-center justify-center gap-2 rounded-md bg-red-bright px-6 py-4 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-red"
       >
+        <IconoWhatsApp className="h-4 w-4" />
         Enviar por WhatsApp
       </a>
 

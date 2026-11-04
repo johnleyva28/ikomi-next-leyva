@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { productosData } from "@/data/productos";
 import { contacto } from "@/data/sitio";
 import ProductCard from "@/components/ProductCard";
+import IconoWhatsApp from "@/components/IconoWhatsApp";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -152,6 +153,7 @@ async function DetalleProducto({ params }: Props) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-md bg-red-bright px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-red"
               >
+                <IconoWhatsApp className="h-4 w-4" />
                 Comprar por WhatsApp
               </a>
               <a

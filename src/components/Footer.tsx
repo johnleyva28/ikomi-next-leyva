@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { contacto } from "@/data/sitio";
+import IconoWhatsApp from "@/components/IconoWhatsApp";
 
 const enlaces = [
   { name: "Inicio", path: "/" },
@@ -76,6 +77,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="mt-5 inline-flex items-center justify-center rounded-md bg-red-bright px-5 py-3 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-red"
             >
+              <IconoWhatsApp className="h-4 w-4" />
               Cotizar por WhatsApp
             </a>
           </div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import IconoWhatsApp from "@/components/IconoWhatsApp";
 import { contacto } from "@/data/sitio";
 
 interface CtaBandaProps {
@@ -35,6 +36,7 @@ export default function CtaBanda({
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-md bg-red-bright px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-red"
           >
+            <IconoWhatsApp className="h-4 w-4" />
             Enviar mensaje por WhatsApp
           </a>
           <Link
