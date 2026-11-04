@@ -113,7 +113,11 @@ El detalle está justificado en [`docs/DECISIONES.md`](docs/DECISIONES.md).
 | [`docs/BITACORA_IA.md`](docs/BITACORA_IA.md) | Bitácora de uso de IA y casos de código incorrecto detectados. |
 | [`evidencias/`](evidencias/) | Capturas de build, responsive (375/768/1280) y del experimento de red. |
 
-## Imágenes
+## Imágenes, favicon e iconos
 
-Las fotografías de productos, marcas y banners se sirven desde el CDN de `ikomiperu.com` con
-`next/image`, por eso `next.config.ts` permite ese dominio en `images.remotePatterns`.
+- Las fotografías de productos, marcas y banners se sirven desde el CDN de `ikomiperu.com` con
+  `next/image`, por eso `next.config.ts` permite ese dominio en `images.remotePatterns`.
+- El favicon es el logo de IKOMI: está en `src/app/favicon.ico` y además se declara el PNG de 512 px
+  en `metadata.icons`.
+- Todos los iconos del sitio (ubicación, correo, teléfono, flechas y el botón de WhatsApp) vienen de
+  `lucide-react`, así que todos tienen el mismo trazo y el mismo estilo.
